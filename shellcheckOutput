@@ -1,0 +1,211 @@
+
+In asg4.sh line 15:
+declare -rix NUM_PROCESSES=`wc -l $PROCESS_FILE | egrep -o '^[^ ]* '`
+                           ^-- SC2006: Use $(..) instead of deprecated `..`
+
+
+In asg4.sh line 16:
+declare -arx PROCESS_INDEXES=(`seq 0 $(( $NUM_PROCESSES - 1 ))`)
+                              ^-- SC2006: Use $(..) instead of deprecated `..`
+                                         ^-- SC2004: $/${} is unnecessary on arithmetic variables.
+
+
+In asg4.sh line 35:
+        for (( a=0; a<${fieldIndex}; a++ )); do                  # Remove all fields we do not need.
+                      ^-- SC2004: $/${} is unnecessary on arithmetic variables.
+
+
+In asg4.sh line 40:
+        eval $resultVar_="'$field'"                              # Return the value of the remaining field.
+             ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 63:
+        for i in ${PROCESS_INDEXES[@]}; do                      # Go through all the processes.
+                 ^-- SC2068: Double quote array expansions, otherwise they're like $* and break on spaces.
+
+
+In asg4.sh line 78:
+        for i in ${PROCESS_INDEXES[@]}; do                      # Go through all the processes.
+                 ^-- SC2068: Double quote array expansions, otherwise they're like $* and break on spaces.
+
+
+In asg4.sh line 83:
+        eval $timeSumVal_="'$timeSum'"                                     # Return the sum of all remaining times.
+             ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 96:
+            if [ $remainingTime -gt 0 ] && [ $availTime -le $currentTime_ ]; then                   
+                                                            ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 101:
+            echo ${eligibleProcesses[@]}
+                 ^-- SC2068: Double quote array expansions, otherwise they're like $* and break on spaces.
+
+
+In asg4.sh line 117:
+       local eligibleProcesses=$( getEligibleProcesses $currentTime_ )
+                                                       ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 124:
+           for (( i=0; i<$processesNum; i++ )); do
+                         ^-- SC2004: $/${} is unnecessary on arithmetic variables.
+
+
+In asg4.sh line 128:
+                   if [ $processesNum -gt 1 ] && [ ${eligibleProcesses[$i]} -eq $prevProcess_ ]; then
+                                                                                ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 138:
+       ageProcesses $currentTime_ $nextProcess
+                    ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 139:
+       eval $nextProcessVal_="'$nextProcess'"
+            ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 160:
+        getField remainingTime $processIdx_ 'remainingTime'
+                               ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 161:
+        getField burstTime $processIdx_ 'burstTime'
+                           ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 162:
+        getField remBurstTime $processIdx_ 'remainingBurstTime'
+                              ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 163:
+        getField prio $processIdx_ 'agedPriority'
+                      ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 164:
+        getField newPrio $processIdx_ 'priority'
+                         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 165:
+        getField currPID $processIdx_ 'pid'
+                         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 166:
+        getField currTID $processIdx_ 'tid'
+                         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 167:
+        getField availTime $processIdx_ 'availTime' 
+                           ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 202:
+            ((availTime+=$runTime))
+                         ^-- SC2004: $/${} is unnecessary on arithmetic variables.
+
+
+In asg4.sh line 206:
+        setField $processIdx_ 'remainingTime' $remainingTime
+                 ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 207:
+        setField $processIdx_ 'remainingBurstTime' $remBurstTime
+                 ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 208:
+        setField $processIdx_ 'availTime' $availTime
+                 ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 209:
+        setField $processIdx_ 'agedPriority' $newPrio
+                 ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 210:
+        setField $processIdx_ 'numAgingSkips' 0
+                 ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 215:
+        eval $runTimeVal_="'$runTime'"
+             ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 247:
+        local eligibleProc=$( getEligibleProcesses $time_ )
+                                                   ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 256:
+            for (( i=0; i<$processesNum; i++ )); do
+                          ^-- SC2004: $/${} is unnecessary on arithmetic variables.
+
+
+In asg4.sh line 258:
+                if [ $processIdx -ne $processRunning_ ]; then
+                                     ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 301:
+    eval $idleTimeVal_="'$currentTime'"
+         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 302:
+    eval $nextProcessVal_="'$nextProcess'"
+         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 311:
+    local prevTID=-1
+          ^-- SC2034: prevTID appears unused. Verify it or export it.
+
+
+In asg4.sh line 316:
+    getField currPID $currIdx_ 'pid'
+                     ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 317:
+    getField currTID $currIdx_ 'tid'
+                     ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 319:
+    if [ $prevIdx_ -ne -1 ]; then 
+         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 320:
+        getField prevPID $prevIdx_ 'pid'
+                         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 321:
+        getField prevTID $prevIdx_ 'tid'
+                         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 338:
+    eval $csTimeVal_="'$currentTime'"
+         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+
+In asg4.sh line 401:
+        printf "Total time remaining (all threads): $remTime"
+               ^-- SC2059: Don't use variables in the printf format string. Use printf "..%s.." "$foo".
+
